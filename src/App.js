@@ -10,6 +10,18 @@ function App() {
 	const [checkType, setCheckType] = useState('');
 	const [start, setStart] = useState(false);
 
+	// debounce function
+	const debounce = (callback, delay) => {
+		let timeoutId;
+		return (...args) => {
+		  clearTimeout(timeoutId);
+		  timeoutId = setTimeout(() => {
+			callback(...args);
+		  }, delay);
+		};
+	  };
+	  
+	
 	const onNewScanResult = async (text, scanResult) => {
 		console.log("App [result]", scanResult);
 
@@ -29,6 +41,10 @@ function App() {
 		}
 	};
 
+	// add debounce
+	const debouncedOnNewScanResult = debounce(onNewScanResult, 1000); // 1000 ms delay
+
+
 	return (
 		<div className="App">
 			<section className="App-section">
@@ -41,7 +57,8 @@ function App() {
 						qrbox={250}
 						disableFlip={false}
 						zoom={20}
-						qrCodeSuccessCallback={onNewScanResult}
+						//qrCodeSuccessCallback={onNewScanResult}
+						qrCodeSuccessCallback={debouncedOnNewScanResult}
 					/>
 					: ''
 				}

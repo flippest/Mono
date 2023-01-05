@@ -17,6 +17,7 @@ __pycache__/
 
 # testing
 /coverage
+BACKUP*
 
 # production
 /build
