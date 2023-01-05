@@ -42,7 +42,7 @@ function App() {
 	};
 
 	// add debounce
-	const debouncedOnNewScanResult = debounce(onNewScanResult, 1000); // 1000 ms delay
+	const debouncedOnNewScanResult = debounce(onNewScanResult, 500); // 500 ms delay
 
 
 	return (
@@ -80,11 +80,11 @@ function ResultsContainer({ scans, eventName, setEventName, checkType, setCheckT
 							<input type="text" name="event" placeholder="Input Event Name Here" style={{ textAlign: 'center' }} onChange={e => setEventName(e.target.value.trim())} />
 							<br />
 							<label>
-								<input type="radio" name="radio-group" value="checkin" onChange={e => setCheckType(e.target.value)} />
+								<input type="radio" name="radio-group" value="in" onChange={e => setCheckType(e.target.value)} />
 								Check In
 							</label>
 							<label>
-								<input type="radio" name="radio-group" value="checkout" onChange={e => setCheckType(e.target.value)} />
+								<input type="radio" name="radio-group" value="out" onChange={e => setCheckType(e.target.value)} />
 								Check Out
 							</label>
 							<div>
