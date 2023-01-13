@@ -34,8 +34,12 @@ def main(event, badgeid, inout):
 	name = badge_names.get(badgeid, badgeid)
 	
 	now = datetime.datetime.now()
-	date_str = now.strftime('%Y-%m-%d')
-	date_time_str = now.strftime('%m/%d/%Y %H:%M:%S') # 12/22/2022 17:46:01 (preferred Google Sheets date/time format)
+	
+	# Subtract 7 hours from the now object to account for Google App Engine unix time to Mountain
+	new_now = now - datetime.timedelta(hours=7)
+	
+	date_str = new_now.strftime('%Y-%m-%d')
+	date_time_str = new_now.strftime('%m/%d/%Y %H:%M:%S') # 12/22/2022 17:46:01 (preferred Google Sheets date/time format)
 	SHEET_NAME = f'{date_str}_{event}'
 	
 	SCOPES = ['https://www.googleapis.com/auth/spreadsheets', 'https://www.googleapis.com/auth/drive']
